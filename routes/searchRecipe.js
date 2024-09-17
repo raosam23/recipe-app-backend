@@ -8,7 +8,7 @@ router.get("/search", async (req, res) => {
     `https://www.themealdb.com/api/json/v1/1/search.php?s=${dishName}`,
   );
   if (responseData.data.meals === null) {
-    res.status(responseData.status).json({ msg: "Meal not found" });
+    return res.status(responseData.status).json({ msg: "Meal not found" });
   }
   const mealObj = responseData.data.meals[0];
   const ingrediants = [];
@@ -37,7 +37,7 @@ router.get("/search", async (req, res) => {
     youtubeLink: youtubeLink,
     ingrediants: ingrediants,
   };
-  res.status(responseData.status).json(mealData);
+  return res.status(responseData.status).json(mealData);
 });
 
 module.exports = router;
